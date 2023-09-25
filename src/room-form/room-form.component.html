@@ -1,0 +1,20 @@
+<div class="py-5">
+</div>
+<div class="container" style="min-width: 200px;">
+    <form action="" (submit)='saveRoom(name.value, description.value);'>
+        <div class="form-group">
+            <label for="name">Назва</label>
+            <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" placeholder="Назва" required #name>
+        </div>
+        <div class="form-group mt-1">   
+            <label for="description">Опис</label>
+            <textarea class="form-control" name="description" id="description" placeholder="Опис" required form="save" #description></textarea>
+        </div>
+        <!-- <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload> -->
+        <div (onUploadFinished)="uploadFinished($event)" class="mb-3">
+            <label for="userfile" class="form-label">Фото</label><span style="color: purple;"> {{progress}}% </span> <span style="color: green;">{{ message }}</span>
+            <input class="form-control" #file type="file" (change)="uploadFile(file.files)">
+        </div>
+        <input type="submit" class="btn btn-primary mt-2" value="Зберегти">
+    </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="py-5">
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+          <div class="card shadow-sm" *ngIf="room.image == null; else imageSet">
+            <svg class="img-thumbnail" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title><?=$kvestroom['name']?></title><rect width="100%" height="100%" fill="#55595c"/><text text-anchor="middle" x="50%" y="50%" fill="#eceeef" dy=".3em">{{ room.name }}</text></svg>
+          </div>
+          <ng-template #imageSet>
+            <img src="{{room.image}}" class="img-thumbnail" alt="...">
+          </ng-template>
+          <br>
+          <a href="/room/{{room.id}}/edit" *ngIf='isLoggedIn'>
+            <button type="button" class="btn btn-info mt-2">Змінити</button>
+          </a>
+      </div>
+      <div class="col">
+        <h1>{{room.name}}</h1>
+        <p>{{room.description}}</p>
+      </div>
+  </div>
+</div>
