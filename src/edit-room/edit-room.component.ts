@@ -3,8 +3,10 @@ import { RoomsService } from '../services/rooms.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { RoomModel } from 'src/models/room.model';
+import { AuthService } from '../services/auth.service';
 import {
   HttpClient,
+  HttpHeaders,
   HttpEventType,
   HttpErrorResponse,
 } from '@angular/common/http';
@@ -26,6 +28,7 @@ export class EditRoomComponent {
     private router: Router,
     public roomsService: RoomsService,
     private httpClient: HttpClient,
+    private as: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +57,13 @@ export class EditRoomComponent {
       .post(
         'https://kvestroomsapi20230925135541.azurewebsites.net/api/upload',
         formData,
-        { reportProgress: true, observe: 'events' },
+        {
+          reportProgress: true,
+          observe: 'events',
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${this.as.getAccessToken()}`,
+          }),
+        },
       )
       .subscribe({
         next: (event) => {

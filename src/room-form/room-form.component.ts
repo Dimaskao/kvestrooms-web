@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RoomsService } from '../services/rooms.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import {
   HttpClient,
+  HttpHeaders,
   HttpEventType,
   HttpErrorResponse,
 } from '@angular/common/http';
@@ -23,6 +25,7 @@ export class RoomFormComponent {
     public roomsService: RoomsService,
     private router: Router,
     private httpClient: HttpClient,
+    private as: AuthService,
   ) {}
 
   uploadFile = (files: any) => {
@@ -37,7 +40,13 @@ export class RoomFormComponent {
       .post(
         'https://kvestroomsapi20230925135541.azurewebsites.net/api/upload',
         formData,
-        { reportProgress: true, observe: 'events' },
+        {
+          reportProgress: true,
+          observe: 'events',
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${this.as.getAccessToken()}`,
+          }),
+        },
       )
       .subscribe({
         next: (event) => {
