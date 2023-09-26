@@ -35,7 +35,6 @@ export class RoomFormComponent {
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-
     this.httpClient
       .post(
         'https://kvestroomsapi20230925135541.azurewebsites.net/api/upload',
